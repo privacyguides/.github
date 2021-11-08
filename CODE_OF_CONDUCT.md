@@ -1,6 +1,6 @@
 In the interest of fostering an open and welcoming environment, we as
 contributors and maintainers of the
-[PrivacyTools](PrivacyTools "wikilink") project and organization pledge
+[Privacy Guides](https://privacyguides.org/) project and organization pledge
 to make participation in our project and our community a harassment-free
 experience for everyone, regardless of a distinction of any kind, such
 as age, body size, disability, ethnicity, sex characteristics, gender
@@ -8,7 +8,7 @@ identity and expression, level of experience, education, socio-economic
 status, nationality, personal appearance, race, religion, or sexual
 identity and orientation.
 
-## Our Standards {#our_standards}
+## Our Standards
 
 Examples of behavior that contributes to creating a positive environment
 include:
@@ -32,7 +32,7 @@ Examples of unacceptable behavior by participants include:
 -   Other conduct which could reasonably be considered inappropriate in
     a professional setting
 
-## Our Responsibilities {#our_responsibilities}
+## Our Responsibilities
 
 Project maintainers are responsible for clarifying the standards of
 acceptable behavior and are expected to take appropriate and fair
@@ -59,11 +59,9 @@ clarified by project maintainers.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may
-be reported by contacting the [Internal Compliance
-Officer](PrivacyTools:Compliance_Officer "wikilink"). The report should
+be reported by contacting the *Internal Compliance Officer*. The report should
 include information on whether the details can be shared with other
-[Compliance Team](PrivacyTools:Compliance_Team "wikilink") and [Core
-Team](PrivacyTools:Core_Team "wikilink") Members and how much may be
+*Compliance Team* and *Core Team* Members and how much may be
 told.
 
 All complaints will be reviewed and investigated and will result in a
@@ -79,5 +77,4 @@ by other members of the project\'s leadership.
 ## Attribution
 
 This Code of Conduct is forked from the Creative Commons BY-4.0
-[Contributor Covenant version
-1.4](https://contributor-covenant.org/version/1/4).
+[Contributor Covenant version 1.4](https://contributor-covenant.org/version/1/4).
