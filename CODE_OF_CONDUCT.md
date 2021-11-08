@@ -27,7 +27,7 @@ Examples of unacceptable behavior by participants include:
     or political attacks
 -   Promoting intolerance
 -   Public or private harassment
--   Publishing others\' private information, such as a physical or
+-   Publishing others' private information, such as a physical or
     electronic address, without explicit permission
 -   Other conduct which could reasonably be considered inappropriate in
     a professional setting
@@ -72,7 +72,7 @@ policies may be posted separately.
 
 Project maintainers who do not follow or enforce the Code of Conduct in
 good faith may face temporary or permanent repercussions as determined
-by other members of the project\'s leadership.
+by other members of the project's leadership.
 
 ## Attribution
 
