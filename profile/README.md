@@ -18,6 +18,9 @@
 <a href="https://www.reddit.com/r/PrivacyGuides/">
 	<img src="https://img.shields.io/reddit/subreddit-subscribers/PrivacyGuides?label=Subscribe%20to%20r%2FPrivacyGuides&style=social">
 </a>
+<a href="https://mastodon.social/@privacyguides">
+	<img src="https://img.shields.io/mastodon/follow/107604420394178246?style=social">
+</a>
 <a href="https://twitter.com/privacy_guides">
 	<img src="https://img.shields.io/twitter/follow/privacy_guides?style=social">
 </a>
