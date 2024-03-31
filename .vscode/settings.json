@@ -4,5 +4,6 @@
   },
   "files.associations": {
     "workflows/*.yml": "github-actions-workflow"
-  }
+  },
+  "editor.formatOnSave": true
 }
