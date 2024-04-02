@@ -101,8 +101,7 @@ jobs:
           pipenv install
           sudo apt install pngquant
 
-      - if: inputs.lang != 'en'
-        uses: falti/dotenv-action@v1.1
+      - uses: falti/dotenv-action@v1.1
         with:
           path: includes/strings.${{ inputs.lang }}.env
           export-variables: true
