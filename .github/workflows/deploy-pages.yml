@@ -1,0 +1,62 @@
+name: Deploy Website Build
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      redirect_root:
+        type: string
+        default: "en"
+
+jobs:
+  github_pages:
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: "pages"
+
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: site-build-*
+          merge-multiple: true
+
+      - run: |
+          for file in *.tar.gz; do tar -zxf "$file"; done
+          ls -la site/
+
+      - if: inputs.redirect_root != ''
+        uses: 1arp/create-a-file-action@0.4.4
+        with:
+          path: site
+          file: index.html
+          content: |
+            <html lang="en">
+              <head>
+                <title>Redirecting...</title>
+                <meta
+                  http-equiv="refresh"
+                  content="0; URL=./${{ inputs.redirect_root }}"
+                />
+              </head>
+            </html>
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@main

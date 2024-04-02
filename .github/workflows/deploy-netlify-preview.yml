@@ -1,0 +1,57 @@
+name: Deploy Website Build
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      netlify_alias:
+        type: string
+        required: true
+      netlify_site_id:
+        type: string
+        required: true
+    outputs:
+      address:
+        value: ${{ jobs.netlify_preview.outputs.address }}
+    secrets:
+      NETLIFY_TOKEN:
+        required: true
+
+jobs:
+  netlify_preview:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    outputs:
+      address: ${{ steps.deployment.outputs.address }}
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: site-build-*
+          merge-multiple: true
+
+      - run: |
+          for file in *.tar.gz; do tar -zxf "$file"; done
+          wget https://raw.githubusercontent.com/privacyguides/privacyguides.org/main/netlify.toml
+          ls -la site/
+
+      - uses: actions/setup-node@v4
+
+      - run: |
+          npm install netlify-cli -g
+
+      - name: Limit length of Netlify alias to 12
+        run: echo "SHORT_ALIAS=$(echo "${{ inputs.netlify_alias }}" | cut -c1-12)" >> "$GITHUB_ENV"
+
+      - id: deployment
+        env:
+          NETLIFY_SITE_ID: ${{ inputs.netlify_site_id }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+        run: |
+          netlify deploy --dir=site --alias=${{ env.SHORT_ALIAS }}
+          echo "address=https://${{ env.SHORT_ALIAS }}--${{ inputs.netlify_site_id }}.netlify.app/" >> "$GITHUB_OUTPUT"

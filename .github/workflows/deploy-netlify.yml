@@ -1,0 +1,58 @@
+name: Deploy Website Build
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      netlify_site_id:
+        type: string
+        required: true
+      environment:
+        type: string
+        required: true
+    outputs:
+      address:
+        value: ${{ jobs.netlify_production.outputs.address }}
+    secrets:
+      NETLIFY_TOKEN:
+        required: true
+
+jobs:
+  netlify_production:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    outputs:
+      address: ${{ steps.prod_deployment.outputs.address }}
+
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ steps.prod_deployment.outputs.address}}
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: site-build-*
+          merge-multiple: true
+
+      - run: |
+          for file in *.tar.gz; do tar -zxf "$file"; done
+          wget https://raw.githubusercontent.com/privacyguides/privacyguides.org/main/netlify.toml
+          ls -la site/
+
+      - uses: actions/setup-node@v4
+
+      - run: |
+          npm install netlify-cli -g
+
+      - id: prod_deployment
+        env:
+          NETLIFY_SITE_ID: ${{ vars.PROD_NETLIFY_SITE }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+        run: |
+          netlify deploy --dir=site --prod-if-unlocked
+          echo "address=https://${{ vars.PROD_NETLIFY_SITE }}.netlify.app/" >> "$GITHUB_OUTPUT"
