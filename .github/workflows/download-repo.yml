@@ -29,12 +29,16 @@ on:
       repo:
         required: true
         type: string
+      privileged:
+        type: boolean
+        default: true
     secrets:
       ACTIONS_SSH_KEY:
-        required: true
+        required: false
 
 jobs:
   download:
+    if: ${{ inputs.privileged }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -43,6 +47,22 @@ jobs:
           repository: "privacyguides/${{ inputs.repo }}"
           path: repo-${{ inputs.repo }}
           ssh-key: ${{ secrets.ACTIONS_SSH_KEY }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: repo-${{ inputs.repo }}
+          path: repo-${{ inputs.repo }}
+          retention-days: 1
+
+  download_unprivileged:
+    if: ${{ !inputs.privileged }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          repository: "privacyguides/${{ inputs.repo }}"
+          path: repo-${{ inputs.repo }}
 
       - uses: actions/upload-artifact@v4
         with:
