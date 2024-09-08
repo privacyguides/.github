@@ -53,6 +53,7 @@ jobs:
           name: repo-${{ inputs.repo }}
           path: repo-${{ inputs.repo }}
           retention-days: 1
+          include-hidden-files: true
 
   download_unprivileged:
     if: ${{ !inputs.privileged }}
@@ -69,3 +70,4 @@ jobs:
           name: repo-${{ inputs.repo }}
           path: repo-${{ inputs.repo }}
           retention-days: 1
+          include-hidden-files: true
