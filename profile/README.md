@@ -12,8 +12,8 @@
 </p>
 
 <p>
-    <a href="https://opencollective.com/privacyguides">
-        <img src="https://img.shields.io/opencollective/all/privacyguides">
+    <a href="https://github.com/sponsors/privacyguides#sponsors">
+        <img src="https://img.shields.io/github/sponsors/privacyguides">
     </a>
 </p>
 
