@@ -1,0 +1,35 @@
+name: Get PGP Public Key
+
+on:
+  workflow_call:
+  workflow_dispatch: 
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+    
+    steps:
+      - name: Install Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          rustflags: ''
+          cache-shared-key: sq-get-pubkey-rust
+        
+      - name: Install sequoia-sop
+        run: |
+          cargo install sequoia-sop --features=cli
+
+      - name: Extract public key
+        run: |
+          sqop extract-cert > public.cert < ${{ secrets.SQ_PRIVATE_KEY }}
+          cat public.cert > $GITHUB_STEP_SUMMARY
+
+      - name: Upload public key
+        uses: actions/upload-artifact@v7
+        with:
+          name: sq-public-key
+          path: public.cert
