@@ -30,7 +30,8 @@ jobs:
 
       - name: Extract public key
         run: |
-          sqop extract-cert > public.cert < ${{ secrets.SQ_PRIVATE_KEY }}
+          echo ${{ secrets.SQ_PRIVATE_KEY }} > private.tsk
+          sqop extract-cert > public.cert < private.tsk
           cat public.cert > $GITHUB_STEP_SUMMARY
 
       - name: Upload public key
