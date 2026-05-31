@@ -22,8 +22,7 @@ jobs:
         env:
           SQ_PRIVATE_KEY: ${{ secrets.SQ_PRIVATE_KEY }}
         run: |
-          echo "$SQ_PRIVATE_KEY" > private.tsk
-          sqop extract-cert > public.cert < private.tsk
+          sqop extract-cert > public.cert < "$SQ_PRIVATE_KEY"
           echo \`\`\` >> $GITHUB_STEP_SUMMARY
           cat public.cert >> $GITHUB_STEP_SUMMARY
           echo \`\`\` >> $GITHUB_STEP_SUMMARY
