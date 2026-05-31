@@ -74,7 +74,7 @@ jobs:
           cp -rl modules/repo-i18n/includes .
           cp -rl modules/repo-i18n/theme .
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           cache: "pipenv"
 
