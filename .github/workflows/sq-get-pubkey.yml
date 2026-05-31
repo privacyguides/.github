@@ -21,6 +21,7 @@ jobs:
         
       - name: Install sequoia-sop
         run: |
+          apt install clang git nettle-dev pkg-config libssl-dev
           cargo install sequoia-sop --features=cli
 
       - name: Extract public key
