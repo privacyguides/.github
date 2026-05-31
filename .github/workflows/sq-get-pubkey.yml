@@ -29,8 +29,10 @@ jobs:
           cargo install sequoia-sop --features=cli
 
       - name: Extract public key
+        env:
+          SQ_PRIVATE_KEY: ${{ secrets.SQ_PRIVATE_KEY }}
         run: |
-          echo ${{ secrets.SQ_PRIVATE_KEY }} > private.tsk
+          echo "$SQ_PRIVATE_KEY" > private.tsk
           sqop extract-cert > public.cert < private.tsk
           cat public.cert > $GITHUB_STEP_SUMMARY
 
