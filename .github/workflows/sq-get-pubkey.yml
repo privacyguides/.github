@@ -1,0 +1,32 @@
+name: Get PGP Public Key
+
+on:
+  workflow_call:
+  workflow_dispatch: 
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Cache APT Packages
+        uses: awalsh128/cache-apt-pkgs-action@acb598e5ddbc6f68a970c5da0688d2f3a9f04d05
+        with:
+          packages: sqop
+
+      - name: Extract public key
+        env:
+          SQ_PRIVATE_KEY: ${{ secrets.SQ_PRIVATE_KEY }}
+        run: |
+          sqop extract-cert > public.cert <<< "$SQ_PRIVATE_KEY"
+          echo \`\`\` >> $GITHUB_STEP_SUMMARY
+          cat public.cert >> $GITHUB_STEP_SUMMARY
+          echo \`\`\` >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload public key
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: sq-public-key
+          path: public.cert

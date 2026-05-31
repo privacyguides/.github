@@ -1,0 +1,46 @@
+name: Sign with PGP Private Key
+
+on:
+  workflow_call:
+    inputs:
+      artifact-path:
+        required: true
+        type: string
+        description: "Path to the artifact to be signed"
+      artifact-name:
+        required: true
+        type: string
+        description: "Name of the artifact to download"
+      file-suffix:
+        type: string
+        default: '.asc'
+        description: "Suffix for detached signature, e.g. .9AA9C119.asc"
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Cache APT Packages
+        uses: awalsh128/cache-apt-pkgs-action@acb598e5ddbc6f68a970c5da0688d2f3a9f04d05
+        with:
+          packages: sqop
+
+      - name: Download artifact
+        uses: actions/download-artifact@484a0b528fb4d7bd804637ccb632e47a0e638317
+        with:
+          name: ${{ inputs.artifact-name }}
+
+      - name: Sign file
+        env:
+          SQ_PRIVATE_KEY: ${{ secrets.SQ_PRIVATE_KEY }}
+        run: |
+          sqop sign <(echo "$SQ_PRIVATE_KEY") > ${{ inputs.artifact-path }}${{ inputs.file-suffix }} < ${{ inputs.artifact-path }}
+
+      - name: Upload public key
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: signed-${{ inputs.artifact-name }}
+          path: ${{ inputs.artifact-path }}${{ inputs.file-suffix }}

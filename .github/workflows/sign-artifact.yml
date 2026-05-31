@@ -1,0 +1,32 @@
+name: Sign Artifact
+
+on:
+  workflow_call:
+    inputs:
+      artifact-path:
+        required: true
+        type: string
+        description: "Path to the artifact to be signed"
+      artifact-name:
+        required: true
+        type: string
+        description: "Name of the artifact to download"
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+    
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ inputs.artifact-name }}
+
+      - name: Attest Build Provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: ${{ inputs.artifact-path }}
