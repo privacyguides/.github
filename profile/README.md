@@ -12,6 +12,9 @@
 </p>
 
 <p>
+    <a href="https://github.com/sponsors/privacyguides#sponsors">
+        <img src="https://img.shields.io/github/sponsors/privacyguides">
+    </a>
     <a href="https://discuss.privacyguides.net">
         <img src="https://img.shields.io/discourse/users?label=Join%20our%20forum&logo=discourse&server=https%3A%2F%2Fdiscuss.privacyguides.net&style=social">
     </a>
