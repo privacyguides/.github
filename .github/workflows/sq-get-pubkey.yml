@@ -18,10 +18,14 @@ jobs:
         with:
           rustflags: ''
           cache-shared-key: sq-get-pubkey-rust
+
+      - name: Cache APT Packages
+        uses: awalsh128/cache-apt-pkgs-action@v1.6.0
+        with:
+          packages: clang git nettle-dev pkg-config libssl-dev
         
       - name: Install sequoia-sop
         run: |
-          apt install clang git nettle-dev pkg-config libssl-dev
           cargo install sequoia-sop --features=cli
 
       - name: Extract public key
