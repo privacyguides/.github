@@ -78,7 +78,7 @@ jobs:
         with:
           cache: "pipenv"
 
-      - uses: actions/cache/restore@v4.0.2
+      - uses: actions/cache/restore@v5.0.5
         with:
           key: site-cache-${{ inputs.repo }}-${{ inputs.ref }}-${{ hashfiles('.cache/**') }}
           path: .cache
@@ -86,7 +86,7 @@ jobs:
             site-cache-${{ inputs.repo }}-${{ inputs.ref }}-
             site-cache-${{ inputs.repo }}-
 
-      - uses: actions/cache/restore@v4.0.2
+      - uses: actions/cache/restore@v5.0.5
         with:
           key: card-cache-${{ inputs.repo }}-${{ inputs.lang }}-${{ inputs.ref }}-${{ hashfiles('config/.cache/plugin/social/manifest.json') }}
           path: |
@@ -117,12 +117,12 @@ jobs:
           pipenv run mkdocs --version
           tar -czvf site-build-${{ inputs.lang }}.tar.gz site
 
-      - uses: actions/cache/save@v4.0.2
+      - uses: actions/cache/save@v5.0.5
         with:
           key: site-cache-${{ inputs.repo }}-${{ inputs.ref }}-${{ hashfiles('.cache/**') }}
           path: .cache
 
-      - uses: actions/cache/save@v4.0.2
+      - uses: actions/cache/save@v5.0.5
         with:
           key: card-cache-${{ inputs.repo }}-${{ inputs.lang }}-${{ inputs.ref }}-${{ hashfiles('config/.cache/plugin/social/manifest.json') }}
           path: |

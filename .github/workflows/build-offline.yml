@@ -54,7 +54,7 @@ jobs:
         with:
           cache: "pipenv"
 
-      - uses: actions/cache/restore@v4.0.2
+      - uses: actions/cache/restore@v5.0.5
         with:
           key: site-cache-${{ github.repository }}-en-${{ github.ref }}-${{ hashfiles('.cache/**') }}
           path: .cache
@@ -81,7 +81,7 @@ jobs:
           tar -czvf offline.tar.gz site
           zip -r -q offline.zip site
 
-      - uses: actions/cache/save@v4.0.2
+      - uses: actions/cache/save@v5.0.5
         with:
           key: site-cache-${{ github.repository }}-en-${{ github.ref }}-${{ hashfiles('.cache/**') }}
           path: .cache
