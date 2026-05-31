@@ -13,20 +13,10 @@ jobs:
       attestations: write
     
     steps:
-      - name: Install Rust toolchain
-        uses: actions-rust-lang/setup-rust-toolchain@v1
-        with:
-          rustflags: ''
-          cache-shared-key: sq-get-pubkey-rust
-
       - name: Cache APT Packages
-        uses: awalsh128/cache-apt-pkgs-action@v1.6.0
+        uses: awalsh128/cache-apt-pkgs-action@acb598e5ddbc6f68a970c5da0688d2f3a9f04d05
         with:
-          packages: clang git nettle-dev pkg-config libssl-dev
-        
-      - name: Install sequoia-sop
-        run: |
-          cargo install sequoia-sop --features=cli
+          packages: sqop
 
       - name: Extract public key
         env:
@@ -34,10 +24,12 @@ jobs:
         run: |
           echo "$SQ_PRIVATE_KEY" > private.tsk
           sqop extract-cert > public.cert < private.tsk
+          echo \`\`\` > $GITHUB_STEP_SUMMARY
           cat public.cert > $GITHUB_STEP_SUMMARY
+          echo \`\`\` > $GITHUB_STEP_SUMMARY
 
       - name: Upload public key
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: sq-public-key
           path: public.cert
