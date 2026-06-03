@@ -48,7 +48,7 @@ jobs:
           path: repo-${{ inputs.repo }}
           ssh-key: ${{ secrets.ACTIONS_SSH_KEY }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: repo-${{ inputs.repo }}
           path: repo-${{ inputs.repo }}
@@ -65,7 +65,7 @@ jobs:
           repository: "privacyguides/${{ inputs.repo }}"
           path: repo-${{ inputs.repo }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: repo-${{ inputs.repo }}
           path: repo-${{ inputs.repo }}
