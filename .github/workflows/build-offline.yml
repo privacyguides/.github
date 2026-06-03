@@ -87,13 +87,13 @@ jobs:
           path: .cache
 
       - name: Upload tar.gz file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: offline.tar.gz
           path: offline.tar.gz
 
       - name: Upload zip file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: offline.zip
           path: offline.zip
@@ -107,7 +107,7 @@ jobs:
             zimwriterfs -w index.html -I assets/brand/logos/png/square/pg-yellow.png -l eng -t "Privacy Guides" -d "Your central privacy and security resource to protect yourself online." -c "Privacy Guides" -p "Jonah Aragon" -n "Privacy Guides" -e "https://github.com/privacyguides/privacyguides.org" /data/site /data/offline-privacy_guides.zim
 
       - name: Upload ZIM file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: offline-privacy_guides.zim
           path: offline-privacy_guides.zim

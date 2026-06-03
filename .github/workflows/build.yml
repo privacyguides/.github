@@ -129,7 +129,7 @@ jobs:
             config/.cache/plugin/social/manifest.json
             config/.cache/plugin/social/assets
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site-build-${{ inputs.lang }}.tar.gz
           path: site-build-${{ inputs.lang }}.tar.gz
